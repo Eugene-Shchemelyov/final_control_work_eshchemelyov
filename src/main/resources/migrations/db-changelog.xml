@@ -1,0 +1,81 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1558423630" author="developer">
+        <createTable tableName="T_USER">
+            <column name="F_ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="F_USERNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_PASSWORD" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_ROLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1558423640" author="developer">
+        <addAutoIncrement catalogName="control"
+                          columnDataType="BIGINT"
+                          columnName="F_ID"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="T_USER"/>
+    </changeSet>
+    <changeSet id="1558422230" author="developer">
+        <createTable tableName="T_BUSINESS_CARD">
+            <column name="F_ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="F_USER_ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="F_TITLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_FULL_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_WORKING_TELEPHONE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1551123640" author="developer">
+        <addAutoIncrement catalogName="control"
+                          columnDataType="BIGINT"
+                          columnName="F_ID"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="T_BUSINESS_CARD"/>
+    </changeSet>
+    <changeSet id="1558423650" author="developer">
+        <addForeignKeyConstraint baseColumnNames="F_USER_ID"
+                                 baseTableName="T_BUSINESS_CARD"
+                                 constraintName="FK_T_USER_T_BUSINESS_CARD"
+                                 referencedColumnNames="F_ID"
+                                 referencedTableName="T_USER"/>
+    </changeSet>
+    <changeSet id="1558423652" author="developer">
+        <insert tableName="T_USER">
+            <column name="F_USERNAME" value="admin"/>
+            <column name="F_PASSWORD" value="$2a$12$kImkjwU/naRANbTpC914LOJxduNREMw4gUz0EsDxeqywyf6xBdRF2"/>
+            <column name="F_ROLE" value="ADMINISTRATOR"/>
+        </insert>
+    </changeSet>
+    <changeSet id="1558221236" author="developer">
+        <insert tableName="T_USER">
+            <column name="F_USERNAME" value="customer"/>
+            <column name="F_PASSWORD" value="$2a$12$kImkjwU/naRANbTpC914LOJxduNREMw4gUz0EsDxeqywyf6xBdRF2"/>
+            <column name="F_ROLE" value="CUSTOMER"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
